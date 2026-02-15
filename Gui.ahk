@@ -90,10 +90,10 @@ SettingsMap["BorTop"] := ["resolution"]
 SettingsMap["BorBot"] := ["resolution"]
 SettingsMap["VarX"] := ["variable",0]
 SettingsMap["VarY"] := ["variable",0]
-RusVer := "0.2.7"
+RusVer := "0.3.0"
 SettingsMap["SearchMissoin"] := ["UNSTABLE", 0]
 Ratio := ResXnew / (ResYnew - BorBot - BorTop)
-RatioStand := 1980/(1080 - 22 - 48)
+RatioStand := 1980/(1080 - 23 - 48)
 SettingsMap["Ratio"] := ["UNSTABLE"]
 
 ; --- Personal Tree ---
@@ -146,16 +146,12 @@ Gui, Tab, 1
     Gui, Add, Text, xp+20 yp+20 w840, SYSTEM & GAME SETTINGS:
     Gui, Font, Norm
     Gui, Add, Text, y+5 w840, - Важно: язык игры поставить на "English".
+    Gui, Add, Text, y+5 w840, - Настройка интерфейса: Мобильная или ПК версия (новый стиль не работает).
     Gui, Add, Text, y+5 w840, - Важно: раскладка клавиатуры должна стоять на английском.
     Gui, Add, Text, y+5 w840, - Важно: во вклалке "НАСТРОЙ ЗДЕСЬ" указать параметры экрана и высоту рамок сверху и панели ПУСК.
     Gui, Add, Text, y+5 w840, - Важно: параметры экрана -> масштаб выставить 100`% (по умолчанию так и стоит).
 	Gui, Add, Text, y+5 w840, - Желательно играть в оконном режиме (а панель ПУСК не должна быть скрыта).
-	Gui, Add, Text, y+5 w840, - Работает нестабильно: полноэкранный режим. В этом случае панель ПУСК желательно скрывать.
-
-    Gui, Font, Bold
-    Gui, Add, Text, y+10 w840, GAMEPLAY SETTINGS:
-    Gui, Font, Norm
-    Gui, Add, Text, y+5 w840, - Настройка интерфейса: Мобильная или ПК версия (новый стиль не работает).
+	Gui, Add, Text, y+5 w840, - Работает нестабильно: полноэкранный режим.
     Gui, Add, Text, y+5 w840, - включите "подтверждение для использования самоцветов" (на всякий случай).
 
     Gui, Font, Bold
@@ -163,20 +159,19 @@ Gui, Tab, 1
     Gui, Font, Norm
 	Gui, Add, Text, y+5 w840, - Клавиша ESC останавливает бота
 	Gui, Add, Text, y+5 w840, - Подсказка: если это переведено, то это работает. Если нет, то лучше отключить
-    Gui, Add, Text, y+5 w840, - Чем меньше функций включено, тем стабильнее работает ;)
     Gui, Add, Text, y+5 w840, - ВАЖНО: не перемещайте карту миссий и не используйте зум. Если передвинули - перезайдите в игру.
 	
     Gui, Font, Bold
     Gui, Add, Text, y+10 w840, Известные ОШИБКИ:
     Gui, Font, Norm
-	Gui, Add, Text, y+5 w840, - Если соотношние сторон в игре отличается от идеала на 0.02 и выше, возможны проблемы с попаданием по кнопкам и нестабильная работа бота`n*Идеал ~= 1.96. Ваше соотношние сторон можно увидеть после сохранения параметров и перезахода, внизу на вкладке "Настрой здесь".
+	Gui, Add, Text, y+5 w840, - Если соотношние сторон в игре отличается от идеала на 0.05 и выше, возможны проблемы с попаданием по кнопкам и нестабильная работа бота`n*Идеал ~= 1.96. Ваше соотношние сторон можно увидеть после сохранения параметров и перезахода, внизу на вкладке "Настрой здесь".
 	Gui, Add, Text, y+5 w840, - При поиске заданий на х2 отряда может задевать клавишы покупки славы\отряда. `nрекомендуется поставить приоритет на эти задания (стоит по умолчанию) и проследить не кликнет ли их во время перебора миссий
-	Gui, Add, Text, y+5 w840, - Алхимия неверно определяет клавишу "завершить бесплатно", потому функция бесплатного завершения отключена.
+	Gui, Add, Text, y+5 w840, - Алхимия неверно определяет клавишу "завершить бесплатно", потому функция бесплатного завершения отключена. `nможет не видеть кнопку Free `n"Улучшать до макс уровня" работает не стабильно
 
     ; --- Action Buttons ---
     Gui, Add, Button, x240 y520 w200 h60 gSaveSettings, СОХРАНИТЬ
     Gui, Add, Button, x520 y520 w200 h60 gButtonStart, запустить бота
-
+	
 ; ------------------------------------------------------------------------------
 ; TAB 2: GENERAL OPTIONS
 ; ------------------------------------------------------------------------------
@@ -245,7 +240,7 @@ Gui, Tab, 2
 ; --- Hero Upgrades ---
     Gui, Add, GroupBox, x335 yp+30 w300 h240, Улучшение героев на этапах
     Gui, Add, Checkbox, xp+15 yp+20 vNoHero Checked%NoHero%, (общее) не улучшать героев 
-    Gui, Add, Checkbox, y+10 vNextMilestone Checked%NextMilestone%, Улучшать до макс уровня (выключи, не работает)
+    Gui, Add, Checkbox, y+10 vNextMilestone Checked%NextMilestone%, Улучшать до макс уровня (работает неправильно)
 	Gui, Font, Italic
 	Gui, Add, Text, y+5, если выключено, нажмает "улучишть" по разу `nза круг потому желательно выставить в игре:`n улучать до макс уровня
     Gui, Font, Norm
@@ -412,7 +407,7 @@ Gui, Tab, 5
     Gui, Add, Text, x20 y40 w900 h30 Center, Разрешение экрана и границы
     Gui, Font, Norm
 
-    Gui, Add, GroupBox, x40 y80 w450 h480, Настройки границ окон
+    Gui, Add, GroupBox, x40 y80 w450 h410, Настройки границ окон
 	
     Gui, Add, Text, xp+20 yp+40, разрешение экрана по X (1920\1360):
     Gui, Add, Edit, y+10 w250 vResXnew, %ResXnew%
@@ -433,14 +428,12 @@ Gui, Tab, 5
     Gui, Add, Text, x60 y+10 w400,
 	
     Gui, Font, Italic
-	Gui, Add, Text, yp+40, Проверка для отладки: VarX = %VarX%, VarY = %VarY%`n(переменные не должны быть равны 0)`nсоотношение сторон в игре = %Ratio% (Идеал = %RatioStand%)`n(данные обновляются после перезапуска программы
-;	Gui, Add, Text, yp+20, 
+	Gui, Add, Text, yp+10, Проверка для отладки: VarX = %VarX%, VarY = %VarY%`n(переменные не должны быть равны 0)`nсоотношение сторон в игре = %Ratio% (Идеал = %RatioStand%)`n(данные обновляются после перезапуска программы
     Gui, Font, Norm
 	
     ; --- Action Buttons ---
-    Gui, Add, Button, x240 y520 w200 h60 gSaveSettings, СОХРАНИТЬ
-    Gui, Add, Button, x520 y520 w200 h60 gButtonStart, запустить бота
-
+    Gui, Add, Button, x100 y520 w180 h60 gSaveSettings, СОХРАНИТЬ`n
+    Gui, Add, Button, x400 y520 w180 h60 gButtonStart, запустить бота
 
 ; ------------------------------------------------------------------------------
 ; TAB 6: VERSION
@@ -480,7 +473,7 @@ Return
 SaveSettings:
     Gui, Submit, NoHide
 	VarX := (ResXnew/1920)
-	VarY := (ResYnew-BorTop-BorBot)/1010
+	VarY := (ResYnew-BorTop-BorBot)/(1080-23-48)
 	Ratio := ResXnew / (ResYnew - BorBot - BorTop)
     SaveSettings()
     MsgBox, 64, Saved, Settings have been saved successfully!
@@ -517,6 +510,4 @@ SaveSettings() {
         CurrentVal := %VarName%
         IniWrite, %CurrentVal%, settings.ini, %Section%, %VarName%
     }
-;	VarX := (ResXnew/1920)
-;	VarY := (ResYnew-BorTop-BorBot)/1010
 }
