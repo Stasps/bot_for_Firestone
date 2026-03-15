@@ -10,24 +10,24 @@ Global SettingsMap := {}
 
 ; --- Common Options ---
 SettingsMap["Token"] := ["CommonOptions", 0]
-SettingsMap["SellEx"] := ["CommonOptions", 1]
+SettingsMap["SellEx"] := ["CommonOptions", 0]
 SettingsMap["SellScrolls"] := ["CommonOptions", 0]
 SettingsMap["SellNoGold"] := ["CommonOptions", 0]
-SettingsMap["SellAll"] := ["CommonOptions", 1]
-SettingsMap["SellNone"] := ["CommonOptions", 0]
-SettingsMap["ExoticUpgrades"] := ["CommonOptions", 1]
-SettingsMap["BuyEx"] := ["CommonOptions", 1]
+SettingsMap["SellAll"] := ["CommonOptions", 0]
+SettingsMap["SellNone"] := ["CommonOptions", 1]
+SettingsMap["ExoticUpgrades"] := ["CommonOptions", 0]
+SettingsMap["BuyEx"] := ["CommonOptions", 0]
 SettingsMap["Chests"] := ["CommonOptions", 0]
-SettingsMap["GearChestExclude"] := ["CommonOptions", "Mythic"]
-SettingsMap["JewelChestExclude"] := ["CommonOptions", "Emerald"]
-SettingsMap["Bless"] := ["CommonOptions", 1]
+SettingsMap["GearChestExclude"] := ["CommonOptions", "Exclude All"]
+SettingsMap["JewelChestExclude"] := ["CommonOptions", "Exclude All"]
+SettingsMap["Bless"] := ["CommonOptions", 0]
 SettingsMap["Delay"] := ["CommonOptions", 0]
 SettingsMap["Quests"] := ["CommonOptions", 0]
 SettingsMap["Events"] := ["CommonOptions", 0]
-SettingsMap["Mail"] := ["CommonOptions", 1]
+SettingsMap["Mail"] := ["CommonOptions", 0]
 SettingsMap["Awaken"] := ["CommonOptions", 0]
-SettingsMap["Crystal"] := ["CommonOptions", 1]
-SettingsMap["Chaos"] := ["CommonOptions", 1]
+SettingsMap["Crystal"] := ["CommonOptions", 0]
+SettingsMap["Chaos"] := ["CommonOptions", 0]
 SettingsMap["PTree"] := ["CommonOptions", 0]
 SettingsMap["GuardianTrain"] := ["CommonOptions", "Vermilion"]
 SettingsMap["UpgradeSpecial"] := ["HeroOptions", 1]
@@ -37,6 +37,7 @@ SettingsMap["UpgradeH2"] := ["HeroOptions", 1]
 SettingsMap["UpgradeH3"] := ["HeroOptions", 1]
 SettingsMap["UpgradeH4"] := ["HeroOptions", 1]
 SettingsMap["UpgradeH5"] := ["HeroOptions", 1]
+
 ; --- Mission Priority ---
 SettingsMap["Priority1"] := ["MissionPriority", "2 Squad"]
 SettingsMap["Priority2"] := ["MissionPriority", "War"]
@@ -44,28 +45,29 @@ SettingsMap["Priority3"] := ["MissionPriority", "Medium"]
 SettingsMap["Priority4"] := ["MissionPriority", "Short"]
 SettingsMap["Priority5"] := ["MissionPriority", "Leftover"]
 SettingsMap["MapReset"] := ["MissionPriority", 0]
+
 ; --- QoL/Rare Options ---
-SettingsMap["Beer"] := ["QoL/RareOptions", 0]
-SettingsMap["Scarab"] := ["QoL/RareOptions", 0]
+SettingsMap["Beer"] := ["QoL/RareOptions", 1]
+SettingsMap["Scarab"] := ["QoL/RareOptions", 1]
 SettingsMap["NoGuild"] := ["QoL/RareOptions", 0]
 SettingsMap["NoEng"] := ["QoL/RareOptions", 0]
-SettingsMap["Pickaxes"] := ["QoL/RareOptions", 0]
+SettingsMap["Pickaxes"] := ["QoL/RareOptions", 1]
 SettingsMap["GNotif"] := ["QoL/RareOptions", 0]
 SettingsMap["Alch"] := ["QoL/RareOptions", 0]
 SettingsMap["Research"] := ["QoL/RareOptions", 0]
 SettingsMap["SkipOracle"] := ["QoL/RareOptions", 0]
-SettingsMap["NoHero"] := ["QoL/RareOptions", 1]
+SettingsMap["NoHero"] := ["QoL/RareOptions", 0]
 SettingsMap["NextMilestone"] := ["QoL/RareOptions", 0]
 SettingsMap["DisableWarning"] := ["QoL/RareOptions", 1]
 
 ; --- Other Options ---
 SettingsMap["Shop"] := ["OtherOptions", 0]
-SettingsMap["DailyOracle"] := ["OtherOptions", 1]
-SettingsMap["PVP"] := ["OtherOptions", 1]
-SettingsMap["Liberation"] := ["OtherOptions", 1]
+SettingsMap["DailyOracle"] := ["OtherOptions", 0]
+SettingsMap["PVP"] := ["OtherOptions", 0]
+SettingsMap["Liberation"] := ["OtherOptions", 0]
 SettingsMap["UpgradeWM"] := ["OtherOptions", "Don't Upgrade WM's"]
-SettingsMap["WMOptions"] := ["OtherOptions", "Level and Blueprints"]
-SettingsMap["Blueprints"] := ["OtherOptions", "Damage and Health"]
+SettingsMap["WMOptions"] := ["OtherOptions", "Blueprints Only"]
+SettingsMap["Blueprints"] := ["OtherOptions", "Damage Only"]
 SettingsMap["Talents450"] := ["OtherOptions", "Don't Upgrade Talents (0-450 Talent Points)"]
 SettingsMap["Talents800"] := ["OtherOptions", "Don't Upgrade Talents (500+ Talent Points)"]
 
@@ -79,11 +81,7 @@ global BorTop
 global BorBot
 global VarX
 global SearchMissoin
-; := ResXnew/1920
-;	SetFormat, float, 0.2
 global VarY
-; := ( ResYnew - BorTop - BorBot ) / 1010
-;	SetFormat, float, 0.2
 SettingsMap["ResXnew"] := ["resolution"]
 SettingsMap["ResYnew"] := ["resolution"]
 SettingsMap["BorTop"] := ["resolution"]
