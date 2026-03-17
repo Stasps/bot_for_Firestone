@@ -164,7 +164,8 @@ loop:
         ;check if Upgrade Blessings is checked
         GuiControlGet, Checked, , Bless,
             If (Checked = 1){
-                OpenBlessChests()
+				MsgBox, , OpenBlessChests.ahk не работает!, ОТКЛЮЧИ в настройках "Улучшать благословления", 2
+                ;OpenBlessChests()
             }
         }
     ; start town section

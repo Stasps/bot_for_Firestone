@@ -224,10 +224,10 @@ if (GuardianTrain != "")
     GuiControl, ChooseString, GuardianTrain, %GuardianTrain%
 
 ; --- Оракул ---
-Gui, Add, GroupBox, x20 y405 w300 h100, Оракул
-Gui, Add, Checkbox, x35 y425 w250 vBless Checked%Bless%, Улучшать благословления
-Gui, Add, Checkbox, x35 y450 w250 vDailyOracle Checked%DailyOracle%, Забирать ежедневные награды оракула
-Gui, Add, Checkbox, x35 y475 w250 vSkipOracle Checked%SkipOracle%, (Общий) пропустить оракула
+Gui, Add, GroupBox, x20 y400 w300 h100, Оракул
+Gui, Add, Checkbox, x35 y425 w280 vBless Checked%Bless%, (не работает!) Улучшать благословления
+Gui, Add, Checkbox, x35 y450 w280 vDailyOracle Checked%DailyOracle%, Забирать ежедневные награды оракула
+Gui, Add, Checkbox, x35 y475 w280 vSkipOracle Checked%SkipOracle%, (Общий) пропустить оракула
 
 ; --- Пауза между циклами бота ---
 Gui, Add, GroupBox, x20 y515 w300 h60, Пауза между циклами бота
@@ -272,13 +272,13 @@ Gui, Font, Norm
 
 Gui, Add, Text, x350 y460 w250, Выберите героев для улучшения:
 
-Gui, Add, Checkbox, x350 y480 w140 vUpgradeSpecial Checked%UpgradeSpecial%, Общие
-Gui, Add, Checkbox, x480 y480 w140 vUpgradeGuardian Checked%UpgradeGuardian%, Стражи
-Gui, Add, Checkbox, x350 y505 w140 vUpgradeH1 Checked%UpgradeH1%, Герой на позиции 1
-Gui, Add, Checkbox, x480 y505 w140 vUpgradeH2 Checked%UpgradeH2%, Герой на позиции 2
-Gui, Add, Checkbox, x350 y530 w140 vUpgradeH3 Checked%UpgradeH3%, Герой на позиции 3
-Gui, Add, Checkbox, x480 y530 w140 vUpgradeH4 Checked%UpgradeH4%, Герой на позиции 4
-Gui, Add, Checkbox, x350 y555 w140 vUpgradeH5 Checked%UpgradeH5%, Герой на позиции 5
+Gui, Add, Checkbox, x350 y480 w135 vUpgradeSpecial Checked%UpgradeSpecial%, Общие
+Gui, Add, Checkbox, x480 y480 w135 vUpgradeGuardian Checked%UpgradeGuardian%, Стражи
+Gui, Add, Checkbox, x350 y505 w135 vUpgradeH1 Checked%UpgradeH1%, Герой на позиции 1
+Gui, Add, Checkbox, x480 y505 w135 vUpgradeH2 Checked%UpgradeH2%, Герой на позиции 2
+Gui, Add, Checkbox, x350 y530 w135 vUpgradeH3 Checked%UpgradeH3%, Герой на позиции 3
+Gui, Add, Checkbox, x480 y530 w135 vUpgradeH4 Checked%UpgradeH4%, Герой на позиции 4
+Gui, Add, Checkbox, x350 y555 w135 vUpgradeH5 Checked%UpgradeH5%, Герой на позиции 5
 
 ; ========== КОЛОНКА 3 ==========
 ; --- Daily Routine ---
@@ -504,7 +504,6 @@ Gui, Tab, 6
     Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисcии особождения\подземелья (0.3.2)
     Gui, Add, Text, x40 y+5, - пробуждать героев, участвовать в разломе хаоса и прокачивать персональное древо (0.3.3)
 	Gui, Add, Text, x40 y+5, - забирать награды за ежедневные\ежнедельные задания, проверять почту, забирать награды событий (0.3.4)
-	Gui, Add, Text, x40 y+5, - улучшать Благословления оракула (0.3.5)
 
     ; --- Шаблон: по идее работает, но не тестировал ---
     Gui, Font, Bold
@@ -519,7 +518,7 @@ Gui, Tab, 6
     Gui, Add, Text, x40 y+15, не умеет:
     Gui, Font, Norm
     Gui, Add, Text, x40 y+5, - Открывать сундуки
-    ; Gui, Add, Text, x40 y+5, - пункт 2 (пример)
+    Gui, Add, Text, x40 y+5, - улучшать Благословления оракула (0.3.5), так как нужно сначала научить открывать сундуки
     ; Gui, Add, Text, x40 y+5, - пункт 3 (пример)
 
     ; --- Отображение окна (уже есть в коде, оставляем как есть) ---
