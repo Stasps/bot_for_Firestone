@@ -1,43 +1,49 @@
-; Awaken.ahk
+; Awaken.ahk — адаптированно
 
 #Include Functions\subFunctions\BigClose.ahk
 
 AwakenRun(){
     ControlFocus,, Firestone
-	MsgBox, ,Awaken.ahk, это ещё не работает!,2
+    MsgBox, ,Awaken.ahk, Пробуждаем героев, 1
+    
     ; Check for awaken heroes notification on crystal screen
-    PixelSearch, X, Y, 1107, 745, 1367, 944, 0xF40000, 3, Fast RGB
+    PixelSearch, X, Y, 1107*VarX, (745-22)*VarY + BorTop, 1367*VarX, (944-22)*VarY + BorTop, 0xF40000, 3, Fast RGB
     If (ErrorLevel = 0){
-        MouseMove, 1192, 847
+        MouseMove, 1192*VarX, (847-22)*VarY + BorTop, 0
         Sleep, 1000
         Click
         Sleep, 1500
+        
         ; look for and click highest x#
-        PixelSearch, X, Y, 1839, 313, 1902, 328, 0x0AA008, 3, Fast RGB
+        ; проверяем крайний правый (5x)
+        PixelSearch, X, Y, 1839*VarX, (313-22)*VarY + BorTop, 1902*VarX, (328-22)*VarY + BorTop, 0x0AA008, 3, Fast RGB
         If (ErrorLevel = 0){
-            MouseMove, 1865, 338
+            MouseMove, 1865*VarX, (338-22)*VarY + BorTop, 0
             Sleep, 1000
             Click
             Sleep, 1000
         } Else {
-            PixelSearch, X, Y, 1739, 316, 1802, 330, 0x0AA008, 3, Fast RGB
+            ; проверяем 4x
+            PixelSearch, X, Y, 1739*VarX, (316-22)*VarY + BorTop, 1802*VarX, (330-22)*VarY + BorTop, 0x0AA008, 3, Fast RGB
             If (ErrorLevel = 0){
-                MouseMove, 1767, 342
+                MouseMove, 1767*VarX, (342-22)*VarY + BorTop, 0
                 Sleep, 1000
                 Click
                 Sleep, 1000
             } Else {
-                PixelSearch, X, Y, 1639, 315, 1706, 319, 0x0AA008, 3, Fast RGB
+                ; проверяем 3x
+                PixelSearch, X, Y, 1639*VarX, (315-22)*VarY + BorTop, 1706*VarX, (319-22)*VarY + BorTop, 0x0AA008, 3, Fast RGB
                 If (ErrorLevel = 0){
-                    MouseMove, 1676, 339
+                    MouseMove, 1676*VarX, (339-22)*VarY + BorTop, 0
                     Sleep, 1000
                     Click
                     Sleep, 1000
                 }
             }
         }
+        
         ; Change to auto
-        MouseMove, 1774, 993
+        MouseMove, 1774*VarX, (993-22)*VarY + BorTop, 0
         Sleep, 1000
         Click
         Sleep, 20000
