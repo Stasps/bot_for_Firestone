@@ -28,7 +28,7 @@ ClaimCampaign(){
     }
 	    GuiControlGet, Checked, , Liberation,
     If (Checked=1){
-	MsgBox, ,LiberationMissions, LiberationMissions - настройка включена, 1
+	MsgBox, ,LiberationMissions, Переходим к миссиям освобождения, 1
         LiberationMissions()
     } 
     BigClose()

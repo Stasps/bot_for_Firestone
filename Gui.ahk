@@ -44,6 +44,7 @@ SettingsMap["Priority2"] := ["MissionPriority", "War"]
 SettingsMap["Priority3"] := ["MissionPriority", "Medium"]
 SettingsMap["Priority4"] := ["MissionPriority", "Short"]
 SettingsMap["Priority5"] := ["MissionPriority", "Leftover"]
+SettingsMap["SearchMissoin"] := ["MissionPriority", 1]
 SettingsMap["MapReset"] := ["MissionPriority", 0]
 
 ; --- QoL/Rare Options ---
@@ -82,17 +83,16 @@ global BorBot
 global VarX
 global SearchMissoin
 global VarY
-SettingsMap["ResXnew"] := ["resolution"]
-SettingsMap["ResYnew"] := ["resolution"]
-SettingsMap["BorTop"] := ["resolution"]
-SettingsMap["BorBot"] := ["resolution"]
-SettingsMap["VarX"] := ["variable",0]
-SettingsMap["VarY"] := ["variable",0]
-RusVer := "0.3.0"
-SettingsMap["SearchMissoin"] := ["UNSTABLE", 0]
+SettingsMap["ResXnew"] := ["Resolution"]
+SettingsMap["ResYnew"] := ["Resolution"]
+SettingsMap["BorTop"] := ["Resolution"]
+SettingsMap["BorBot"] := ["Resolution"]
+SettingsMap["VarX"] := ["Variable",0]
+SettingsMap["VarY"] := ["Variable",0]
+RusVer := "0.3.2"
 Ratio := ResXnew / (ResYnew - BorBot - BorTop)
 RatioStand := 1980/(1080 - 23 - 48)
-SettingsMap["Ratio"] := ["UNSTABLE"]
+SettingsMap["Ratio"] := ["Debug"]
 
 ; --- Personal Tree ---
 SettingsMap["AttDmg"] := ["PersonalTree", 0]
@@ -127,7 +127,7 @@ Gui, Font, s9, Segoe UI
 Gui, Color, White
 
 ; Tabs Structure
-Gui, Add, Tab3, x0 y0 w960 h620, Home|General Options|Guild && Personal Tree|War Machines|Настрой здесь|Версия
+Gui, Add, Tab3, x0 y0 w960 h620, Home|Общие настройки|Гильдия и личное древо|Боевые машины|Настройки экрана|Версия
 ; ------------------------------------------------------------------------------
 ; TAB 1: HOME (INSTRUCTIONS & START)
 ; ------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ Gui, Tab, 1
     Gui, Add, Text, x60 y+10 w820, % "Настройка и использование бота:"
     Gui, Font, Norm
     
-    Gui, Add, Text, x60 y+2 w820, % "• На вкладке «НАСТРОЙ ЗДЕСЬ» укажи параметры экрана, отступы сверху\снизу до игрового поля"
+    Gui, Add, Text, x60 y+2 w820, % "• На вкладке «Настройки экрана» укажи параметры экрана, отступы сверху\снизу до игрового поля"
     Gui, Add, Text, x60 y+1 w820, % "• ESC — остановка бота"
     Gui, Add, Text, x60 y+1 w820, % "• Если текст переведён — функция активна. Если нет — лучше отключить"
     Gui, Add, Text, x60 y+1 w820, % "• Не перемещай карту миссий и не используй зум. После сдвига — перезайди в игру"
@@ -168,7 +168,7 @@ Gui, Tab, 1
     Gui, Font, Norm
     
     Gui, Add, Text, x60 y+2 w820, % "• Если соотношение сторон игрового поля сильно отличается от идеала (~1.96), бот может промахиваться по кнопкам."
-    Gui, Add, Text, x60 y+1 w820, % " Текущее соотношение можно увидеть на вкладке «Настрой здесь». Выше 2.1 могут возникнуть проблемы"
+    Gui, Add, Text, x60 y+1 w820, % " Текущее соотношение можно увидеть на вкладке «Настройки экрана». Выше 2.1 могут возникнуть проблемы"
     
     Gui, Add, Text, x60 y+1 w820, % "• При поиске миссий для двух отрядов (2 Squat) может задеть кнопки покупки славы/отряда"
     Gui, Add, Text, x60 y+1 w820, % " Рекомендуется  первый запуск проследить, куда будут первые 10-15 кликов на карте"
@@ -384,10 +384,9 @@ Gui, Tab, 3
 Gui, Tab, 4
     ; --- Misc ---
     Gui, Add, GroupBox, x40 y50 w880 h100, Battle & Miscellaneous
-    Gui, Add, Checkbox, xp+15 yp+30 vPVP Checked%PVP%, Complete Arena Battles
-    Gui, Add, Checkbox, x+20 vLiberation Checked%Liberation%, Complete Liberation Missions
-    ; NEW CHECKBOX
-    Gui, Add, Checkbox, x+20 vDungeonQuest Checked%DungeonQuest%, Complete Dungeon Missions
+    Gui, Add, Checkbox, xp+15 yp+30 vPVP Checked%PVP%, Сражаться на арене королей (PvP)
+    Gui, Add, Checkbox, x+20 vLiberation Checked%Liberation%, Выполнять освободительные миссии
+    Gui, Add, Checkbox, x+20 vDungeonQuest Checked%DungeonQuest%, Выполнять миссии в подземелье
 
     ; --- War Machines ---
     Gui, Add, GroupBox, x40 y170 w880 h350, War Machines & Talents
@@ -441,7 +440,7 @@ Gui, Tab, 5
     ; === Строка 3: BorTop ===
     Gui, Add, Text, x60 y+25 w160, Верхняя граница:
     Gui, Add, Edit, x+10 w150 vBorTop, %BorTop%
-    Gui, Add, Text, x+10 w170, Steam=23, Яндекс=112/135
+    Gui, Add, Text, x+10 w170, Steam=22, Яндекс=111/135
 
     ; === Строка 4: BorBot ===
     Gui, Add, Text, x60 y+25 w160, Панель ПУСК:
@@ -450,7 +449,7 @@ Gui, Tab, 5
 
     ; Пояснение (курсив)
     Gui, Font, Italic
-    Gui, Add, Text, x60 y+25 w500, * Яндекс Браузер: 135 (с панелью закладок), 112 (без)
+    Gui, Add, Text, x60 y+25 w500, * Яндекс Браузер: 135 (с панелью закладок), 111 (без)
     Gui, Font, Norm
 
     ; Отладочная информация
@@ -492,12 +491,13 @@ Gui, Tab, 6
     Gui, Add, Text, x40 y+5, - завершать миссии на карте
     Gui, Add, Text, x40 y+5, - искать и запускать новые миссии на карте
     Gui, Add, Text, x40 y+5, - повышать уровень героев\стражей\спец улучшений на этапах (нужно доделать)
+    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисии особождения\подземелья (новое)
 
     ; --- Шаблон: по идее работает, но не тестировал (закомментировано) ---
-    ; Gui, Font, Bold
-    ; Gui, Add, Text, x40 y+15, по идее работает, но не тестировал:
-    ; Gui, Font, Norm
-    ; Gui, Add, Text, x40 y+5, - пункт 1 (пример)
+    Gui, Font, Bold
+    Gui, Add, Text, x40 y+15, по идее работает, но не тестировал (в яндекс играх):
+    Gui, Font, Norm
+    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисии особождения\подземелья (новое)
     ; Gui, Add, Text, x40 y+5, - пункт 2 (пример)
     ; Gui, Add, Text, x40 y+5, - пункт 3 (пример)
 
