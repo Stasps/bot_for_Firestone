@@ -89,9 +89,9 @@ SettingsMap["BorTop"] := ["Resolution"]
 SettingsMap["BorBot"] := ["Resolution"]
 SettingsMap["VarX"] := ["Variable",0]
 SettingsMap["VarY"] := ["Variable",0]
-RusVer := "0.3.2"
+RusVer := "0.3.3"
 Ratio := ResXnew / (ResYnew - BorBot - BorTop)
-RatioStand := 1980/(1080 - 23 - 48)
+RatioStand := 1980/(1080 - 22 - 48)
 SettingsMap["Ratio"] := ["Debug"]
 
 ; --- Personal Tree ---
@@ -326,57 +326,64 @@ Gui, Tab, 2
     Gui, Add, Checkbox, x660 y+10 vMapReset Checked%MapReset%, Reset map cooldown with gems
 
 ; ------------------------------------------------------------------------------
-; TAB 3: GUILD & PERSONAL TREE
+; TAB 3: ГИЛЬДИЯ И ПЕРСОНАЛЬНОЕ ДРЕВО
 ; ------------------------------------------------------------------------------
 Gui, Tab, 3
-    ; --- TOP SECTION: GUILD ---
+    
+    ; ----- ЗАГОЛОВОК РАЗДЕЛА -----
     Gui, Font, Bold
-    Gui, Add, Text, x20 y40 w900 h20 Center, GUILD & HERO MANAGEMENT
+    Gui, Add, Text, x20 y40 w900 h20 Center, ГИЛЬДИЯ И УПРАВЛЕНИЕ ГЕРОЯМИ
     Gui, Font, Norm
 
-    Gui, Add, GroupBox, x20 y60 w920 h100, Guild Options
-    Gui, Add, Checkbox, xp+20 yp+30 vNoGuild Checked%NoGuild%, (общее) пропустить активность в гильдии
-    Gui, Add, Checkbox, y+15 vGNotif Checked%GNotif%, очистить оповещения гильдии
+	; ----- БЛОК ГИЛЬДИИ -----
+	Gui, Add, GroupBox, x20 y60 w920 h100, Настройки гильдии
 
-    Gui, Add, Checkbox, x350 y90 vPickaxes Checked%Pickaxes%, пропустить забор бесплатных кирок
-    Gui, Add, Checkbox, y+15 vCrystal Checked%Crystal%, тратить кирки автоматически (долбить кристалл)
+	Gui, Add, Checkbox, x40 y90 w250 vNoGuild Checked%NoGuild%, (Общее) пропустить активности гильдии
+	Gui, Add, Checkbox, x370 y90 w200 vPickaxes Checked%Pickaxes%, НЕ получать бесплатные кирки
+	Gui, Add, Checkbox, x670 y90 w200 vCrystal Checked%Crystal%, Разбивать кристалл
+	Gui, Add, Checkbox, x370 y120 w200 vAwaken Checked%Awaken%, Пробуждать героев
+	Gui, Add, Checkbox, x670 y120 w200 vGNotif Checked%GNotif%, Очистить оповещения
+	
+	; Подсказка под мастер-кнопкой
+	Gui, Font, Italic s8, Segoe UI
+	Gui, Add, Text, x60 y105 w250 cGray, % "в том числе и запуск экспедиций"
+	Gui, Font, Norm s9, Segoe UI
 
-    Gui, Add, Checkbox, x650 y90 vAwaken Checked%Awaken%, Awaken Heroes
-
-    ; --- BOTTOM SECTION: PERSONAL TREE ---
+    ; ----- ПЕРСОНАЛЬНОЕ ДРЕВО -----
     Gui, Font, Bold
-    Gui, Add, Text, x20 y180 w900 h20 Center, PERSONAL TREE UPGRADES (Priority: Top to Bottom)
-    Gui, Add, Checkbox, x40 y200 vPTree Checked%PTree%, > ENABLE PERSONAL TREE UPGRADES <
+    Gui, Add, Text, x20 y180 w900 h20 Center, ПЕРСОНАЛЬНОЕ ДРЕВО (приоритет: сверху вниз)
     Gui, Font, Norm
+    
+    Gui, Add, Checkbox, x40 y200 vPTree Checked%PTree%, % "ВКЛЮЧИТЬ УЛУЧШЕНИЕ ДРЕВА"
 
-    ; --- Col 1: Attributes ---
-    Gui, Add, GroupBox, x40 y230 w280 h300, Attributes & Heroes
-    Gui, Add, Checkbox, xp+15 yp+30 vAttDmg Checked%AttDmg%, Attribute Damage
-    Gui, Add, Checkbox, y+10 vAttHp Checked%AttHp%, Attribute Health
-    Gui, Add, Checkbox, y+10 vAttArm Checked%AttArm%, Attribute Armor
-    Gui, Add, Checkbox, y+10 vEnergy Checked%Energy%, Energy Heroes
-    Gui, Add, Checkbox, y+10 vMana Checked%Mana%, Mana Heroes
-    Gui, Add, Checkbox, y+10 vRage Checked%Rage%, Rage Heroes
-    Gui, Add, Checkbox, y+10 vMiner Checked%Miner%, Miner
-    Gui, Add, Checkbox, y+10 vMainAtt Checked%MainAtt%, All Main Attributes
+	; ----- КОЛОНКА 1: АТРИБУТЫ -----
+	Gui, Add, GroupBox, x40 y230 w280 h270, Атрибуты героев
+	Gui, Add, Checkbox, xp+15 yp+25 vAttDmg Checked%AttDmg%, Параметры урона
+	Gui, Add, Checkbox, y+8 vAttHp Checked%AttHp%, Параметры здоровья
+	Gui, Add, Checkbox, y+8 vAttArm Checked%AttArm%, Параметры брони
+	Gui, Add, Checkbox, y+8 vEnergy Checked%Energy%, Герои с энергией
+	Gui, Add, Checkbox, y+8 vMana Checked%Mana%, Герои с маной
+	Gui, Add, Checkbox, y+8 vRage Checked%Rage%, Герои с яростью
+	Gui, Add, Checkbox, y+8 vMainAtt Checked%MainAtt%, Все основные атрибуты
 
-    ; --- Col 2: Specializations ---
-    Gui, Add, GroupBox, x340 y230 w280 h300, Specializations
-    Gui, Add, Checkbox, xp+15 yp+30 vBattle Checked%Battle%, Battle Cry
-    Gui, Add, Checkbox, y+10 vPrest Checked%Prest%, Prestigious
-    Gui, Add, Checkbox, y+10 vFire Checked%Fire%, Firestone Effect
-    Gui, Add, Checkbox, y+10 vGold Checked%Gold%, Raining Gold
-    Gui, Add, Checkbox, y+10 vLevel Checked%Level%, Hero Level Up Cost
-    Gui, Add, Checkbox, y+10 vGuard Checked%Guard%, Guardian
-    Gui, Add, Checkbox, y+10 vFist Checked%Fist%, Fist Fight
-    Gui, Add, Checkbox, y+10 vPrec Checked%Prec%, Precision
+	; ----- КОЛОНКА 2: ОБЩИЕ ПАРАМЕТРЫ -----
+	Gui, Add, GroupBox, x340 y230 w280 h270, Общие параметры
+	Gui, Add, Checkbox, xp+15 yp+25 vMiner Checked%Miner%, Шахтёр (урон по кристаллу)
+	Gui, Add, Checkbox, y+8 vBattle Checked%Battle%, Боевой клич
+	Gui, Add, Checkbox, y+8 vPrest Checked%Prest%, Искатели Firestone
+	Gui, Add, Checkbox, y+8 vFire Checked%Fire%, Эффект Firestone
+	Gui, Add, Checkbox, y+8 vGold Checked%Gold%, Дождь из золота
+	Gui, Add, Checkbox, y+8 vLevel Checked%Level%, Цена повышения уровня героя
+	Gui, Add, Checkbox, y+8 vGuard Checked%Guard%, Сила стража
 
-    ; --- Col 3: Classes ---
-    Gui, Add, GroupBox, x640 y230 w280 h300, Classes
-    Gui, Add, Checkbox, xp+15 yp+30 vMagic Checked%Magic%, Magic Spells
-    Gui, Add, Checkbox, y+10 vTank Checked%Tank%, Tank Specialization
-    Gui, Add, Checkbox, y+10 vDamage Checked%Damage%, Damage Specialization
-    Gui, Add, Checkbox, y+10 vHeal Checked%Heal%, Healer Specialization
+	; ----- КОЛОНКА 3: БОЕВОЙ СТИЛЬ И СПЕЦИАЛИЗАЦИИ -----
+	Gui, Add, GroupBox, x640 y230 w280 h270, Боевой стиль / Специализации
+	Gui, Add, Checkbox, xp+15 yp+25 vFist Checked%Fist%, Кулачный бой
+	Gui, Add, Checkbox, y+8 vPrec Checked%Prec%, Точность
+	Gui, Add, Checkbox, y+8 vMagic Checked%Magic%, Заклинания
+	Gui, Add, Checkbox, y+8 vTank Checked%Tank%, Специализация Танка
+	Gui, Add, Checkbox, y+8 vDamage Checked%Damage%, Специализация Бойца
+	Gui, Add, Checkbox, y+8 vHeal Checked%Heal%, Специализация Целителя
 
 ; ------------------------------------------------------------------------------
 ; TAB 4: WAR MACHINES
@@ -491,14 +498,15 @@ Gui, Tab, 6
     Gui, Add, Text, x40 y+5, - завершать миссии на карте
     Gui, Add, Text, x40 y+5, - искать и запускать новые миссии на карте
     Gui, Add, Text, x40 y+5, - повышать уровень героев\стражей\спец улучшений на этапах (нужно доделать)
-    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисии особождения\подземелья (новое)
+    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисии особождения\подземелья (0.3.2)
+    Gui, Add, Text, x40 y+5, - пробуждать героев, участввать в разломе хаоса и прокачивать персональное древо (0.3.3)
 
     ; --- Шаблон: по идее работает, но не тестировал (закомментировано) ---
     Gui, Font, Bold
     Gui, Add, Text, x40 y+15, по идее работает, но не тестировал (в яндекс играх):
     Gui, Font, Norm
-    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисии особождения\подземелья (новое)
-    ; Gui, Add, Text, x40 y+5, - пункт 2 (пример)
+    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисии особождения\подземелья
+    Gui, Add, Text, x40 y+5, - пробуждать героев, участввать в разломе хаоса и прокачивать персональное древо
     ; Gui, Add, Text, x40 y+5, - пункт 3 (пример)
 
     ; --- Шаблон: не умеет (закомментировано) ---
@@ -520,7 +528,7 @@ Return
 SaveSettings:
     Gui, Submit, NoHide
 	VarX := (ResXnew/1920)
-	VarY := (ResYnew-BorTop-BorBot)/(1080-23-48)
+	VarY := (ResYnew-BorTop-BorBot)/(1080-22-48)
 	Ratio := ResXnew / (ResYnew - BorBot - BorTop)
     SaveSettings()
     MsgBox, 64, Saved, Settings have been saved successfully!

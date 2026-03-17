@@ -1,17 +1,19 @@
-; Chaos.ahk
+; Chaos.ahk Ч адаптировано
 
 #Include Functions\subFunctions\BigClose.ahk
 
 HitChaos(){
-    ControlFocus,, ahk_exe Firestone.exe
-    ; Check for Chaos notificiation on guild scdreen
-    PixelSearch, X, Y, 1525, 695, 1555, 725, 0xF40000, 3, Fast RGB
+    ControlFocus,, Firestone
+    
+    ; Check for Chaos notification on guild screen
+    PixelSearch, X, Y, 1525*VarX, (695-22)*VarY + BorTop, 1555*VarX, (725-22)*VarY + BorTop, 0xF40000, 3, Fast RGB
     If (ErrorLevel = 0){
-        MouseClick, Left, 1410, 625, 1, 0
+        MouseClick, Left, 1410*VarX, (625-22)*VarY + BorTop, 1, 0
         Sleep, 1500
-    ; Change to auto
-    MouseClick, Left, 1740, 980, 1, 0
-    Sleep, 10000
-    BigClose()
+        
+        ; Change to auto
+        MouseClick, Left, 1740*VarX, (980-22)*VarY + BorTop, 1, 0
+        Sleep, 10000
+        BigClose()
     }
 }

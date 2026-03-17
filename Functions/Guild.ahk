@@ -1,4 +1,4 @@
-; Guild.ahk
+; Guild.ahk С адаптировано
 
 #Include Functions\subFunctions\Awaken.ahk
 #Include Functions\subFunctions\Chaos.ahk
