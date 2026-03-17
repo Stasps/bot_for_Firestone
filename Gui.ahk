@@ -89,7 +89,7 @@ SettingsMap["BorTop"] := ["Resolution"]
 SettingsMap["BorBot"] := ["Resolution"]
 SettingsMap["VarX"] := ["Variable",0]
 SettingsMap["VarY"] := ["Variable",0]
-RusVer := "0.3.3"
+RusVer := "0.3.4"
 Ratio := ResXnew / (ResYnew - BorBot - BorTop)
 RatioStand := 1980/(1080 - 22 - 48)
 SettingsMap["Ratio"] := ["Debug"]
@@ -198,39 +198,43 @@ Gui, Tab, 2
     Gui, Add, Text, x20 y40 w900 h30 Center, ОБЩИЕ НАСТРОЙКИ
     Gui, Font, s9 Norm
 
-    ; === COLUMN 1 ===
-    ; --- Selling & Exotic ---
-    Gui, Add, GroupBox, x20 y70 w300 h200, Selling & Exotic Merchant
-    Gui, Add, Checkbox, xp+15 yp+20 vSellEx Checked%SellEx%, Open Exotic Merchant (Master)
-    Gui, Add, Checkbox, y+5 vExoticUpgrades Checked%ExoticUpgrades%, Buy Exotic Upgrades
-    Gui, Add, Checkbox, y+5 vBuyEx Checked%BuyEx%, Buy Exotic Chests
+; ========== КОЛОНКА 1 ==========
+; --- Selling & Exotic ---
+Gui, Add, GroupBox, x20 y70 w300 h190, Selling & Exotic Merchant
+Gui, Add, Checkbox, x35 y90 w250 vSellEx Checked%SellEx%, Open Exotic Merchant (Master)
+Gui, Add, Checkbox, x35 y110 w250 vExoticUpgrades Checked%ExoticUpgrades%, Buy Exotic Upgrades
+Gui, Add, Checkbox, x35 y130 w250 vBuyEx Checked%BuyEx%, Buy Exotic Chests
 
-    Gui, Add, Text, y+10, Selling Strategy:
-    Gui, Add, Radio, y+5 vSellScrolls Checked%SellScrolls%, 1. Sell ONLY Exotic Scrolls
-    Gui, Add, Radio, y+5 vSellNoGold Checked%SellNoGold%, 2. Sell All But Gold Items
-    Gui, Add, Radio, y+5 vSellAll Checked%SellAll%, 3. Sell All Exotic Items
-    Gui, Add, Radio, y+5 vSellNone Checked%SellNone%, 4. Sell Nothing
+Gui, Add, Text, x35 y155 w250, Selling Strategy:
+Gui, Add, Radio, x35 y175 w250 vSellScrolls Checked%SellScrolls%, 1. Sell ONLY Exotic Scrolls
+Gui, Add, Radio, x35 y195 w250 vSellNoGold Checked%SellNoGold%, 2. Sell All But Gold Items
+Gui, Add, Radio, x35 y215 w250 vSellAll Checked%SellAll%, 3. Sell All Exotic Items
+Gui, Add, Radio, x35 y235 w250 vSellNone Checked%SellNone%, 4. Sell Nothing
 
-    ; --- Other Automation ---
-    Gui, Add, GroupBox, x20 yp+40 w300 h150, Other Automation
-    Gui, Add, Checkbox, xp+15 yp+20 vNoEng Checked%NoEng%, Пропустить инженера
-    Gui, Add, Checkbox, y+8 vResearch Checked%Research%, Пропустить исследования
-    Gui, Add, Checkbox, y+8 vDisableWarning Checked%DisableWarning%, Disable Steam Warning
+; --- Other Automation ---
+Gui, Add, GroupBox, x20 y265 w300 h130, Прочие автоматизации
+Gui, Add, Checkbox, x35 y285 w250 vNoEng Checked%NoEng%, Пропустить инженера
+Gui, Add, Checkbox, x35 y310 w250 vResearch Checked%Research%, Пропустить исследования
+Gui, Add, Checkbox, x35 y335 w250 vDisableWarning Checked%DisableWarning%, Disable Steam Warning
 
-    Gui, Add, Text, y+15, Тренировать стража:
-    Gui, Add, DropDownList, w260 vGuardianTrain, Vermilion||Grace|Ankaa|Azhar
-    if (GuardianTrain != "")
-        GuiControl, ChooseString, GuardianTrain, %GuardianTrain%
-		
-    ; --- Oracle ---
-    Gui, Add, GroupBox, x20 yp+35 w300 h95, Oracle
-    Gui, Add, Checkbox, xp+15 yp+20 vBless Checked%Bless%, Upgrade Blessings
-    Gui, Add, Checkbox, y+10 vDailyOracle Checked%DailyOracle%, забирать ежедневные награды оракула
-    Gui, Add, Checkbox, y+10 vSkipOracle Checked%SkipOracle%, (общий) пропустить оракула
-	
-    ; --- Запуск миссий ---
-    Gui, Add, GroupBox, x20 yp+35 w300 h50, Запуск миссий
-    Gui, Add, Checkbox, xp+15 yp+20 vSearchMissoin Checked%SearchMissoin%, искать и запускать миссии на карте
+; --- Тренировка стража ---
+Gui, Add, Text, x35 y363 w150, Тренировать стража:
+Gui, Add, DropDownList, x155 y360 w130 vGuardianTrain, Vermilion|Grace|Ankaa|Azhar
+if (GuardianTrain != "")
+    GuiControl, ChooseString, GuardianTrain, %GuardianTrain%
+
+; --- Оракул ---
+Gui, Add, GroupBox, x20 y405 w300 h100, Оракул
+Gui, Add, Checkbox, x35 y425 w250 vBless Checked%Bless%, Upgrade Blessings
+Gui, Add, Checkbox, x35 y450 w250 vDailyOracle Checked%DailyOracle%, Забирать ежедневные награды оракула
+Gui, Add, Checkbox, x35 y475 w250 vSkipOracle Checked%SkipOracle%, (Общий) пропустить оракула
+
+; --- Пауза между циклами бота ---
+Gui, Add, GroupBox, x20 y515 w300 h60, Пауза между циклами бота
+Gui, Add, Text, x35 y540 w150, Перерыв (секунд):
+Gui, Add, DropDownList, x155 y537 w130 vDelay, 0|30|60||90|120
+if (Delay != "")
+    GuiControl, ChooseString, Delay, %Delay%
 
 
     ; === COLUMN 2 ===
@@ -273,57 +277,53 @@ Gui, Tab, 2
     Gui, Add, Checkbox, x+10 vUpgradeH4 Checked%UpgradeH4%, Герой на позиции 4
     Gui, Add, Checkbox, x350 y+5 vUpgradeH5 Checked%UpgradeH5%, Герой на позиции 5
 
-    ; === COLUMN 3 ===
-    ; --- Daily Routine ---
-    Gui, Add, GroupBox, x650 y70 w290 h180, Ежедневные награды
-    Gui, Add, Checkbox, xp+15 yp+20 vMail Checked%Mail%, Check Mail
-    Gui, Add, Checkbox, y+7 vQuests Checked%Quests%, Claim Quests
-    Gui, Add, Checkbox, y+7 vEvents Checked%Events%, Claim Basic Events
-    Gui, Add, Checkbox, y+7 vChaos Checked%Chaos%, Participate in Chaos Rift
-    Gui, Add, Checkbox, y+7 vShop Checked%Shop%, Подарки (магазин) и награды за вход
+; ========== КОЛОНКА 3 ==========
+; --- Daily Routine ---
+Gui, Add, GroupBox, x650 y70 w290 h150, Ежедневные награды
+Gui, Add, Checkbox, x665 y90 w250 vMail Checked%Mail%, Проверять\чистить почту
+Gui, Add, Checkbox, x665 y115 w250 vQuests Checked%Quests%, Забирать награду в квестах (дня\недели)
+Gui, Add, Checkbox, x665 y140 w250 vEvents Checked%Events%, Забирать награду в событиях
+Gui, Add, Checkbox, x665 y165 w250 vChaos Checked%Chaos%, Участвовать в разломе хаоса
+Gui, Add, Checkbox, x665 y190 w250 vShop Checked%Shop%, Подарки (магазин) и награды за вход
 
-    Gui, Add, Text, y+5, Задержка перед новым циклом (секунд):
-    Gui, Add, DropDownList, w150 vDelay, 0|30|60||90|120
-    if (Delay != "")
-        GuiControl, ChooseString, Delay, %Delay%
+; --- Tavern / Scarab ---
+Gui, Add, GroupBox, x650 y225 w290 h100, Таверна / Игра скарабея
+Gui, Add, Checkbox, x665 y250 w250 vToken Checked%Token%, Use Tavern Tokens / Artifacts
+Gui, Add, Checkbox, x665 y275 w250 vBeer Checked%Beer%, Skip Claiming Beer
+Gui, Add, Checkbox, x665 y300 w250 vScarab Checked%Scarab%, Skip Using Scarab Token
 
-    ; --- Tavern / Scarab ---
-    Gui, Add, GroupBox, x650 yp+35 w290 h110, Tavern / Scarab
-    Gui, Add, Checkbox, xp+15 yp+30 vToken Checked%Token%, Use Tavern Tokens / Artifacts
-    Gui, Add, Checkbox, y+10 vBeer Checked%Beer%, Skip Claiming Beer
-    Gui, Add, Checkbox, y+10 vScarab Checked%Scarab%, Skip Using Scarab Token
+; --- Mission Priority Order ---
+Gui, Add, GroupBox, x650 y335 w290 h240, Приоритет поиска миссий
+Gui, Add, Checkbox, x665 y360 w250 vSearchMissoin Checked%SearchMissoin%, Искать и запускать миссии на карте
 
-; --- Mission Priority ---
-    ; Augmentation de la hauteur (h) de 210 Г  240 pour inclure la checkbox
-    Gui, Add, GroupBox, x650 yp+40 w290 h220, Mission Priority Order
-    PriorityList := "2 Squad|War|Medium|Short|Leftover"
+PriorityList := "2 Squad|War|Medium|Short|Leftover"
 
-    Gui, Add, Text, xp+10 yp+25, 1st:
-    Gui, Add, DropDownList, x+10 w200 vPriority1, %PriorityList%
-    if (Priority1 != "")
-        GuiControl, ChooseString, Priority1, %Priority1%
+Gui, Add, Text, x665 y385 w60, 1st:
+Gui, Add, DropDownList, x730 y385 w180 vPriority1, %PriorityList%
+if (Priority1 != "")
+    GuiControl, ChooseString, Priority1, %Priority1%
 
-    Gui, Add, Text, x660 y+10, 2nd:
-    Gui, Add, DropDownList, x+10 w200 vPriority2, %PriorityList%
-    if (Priority2 != "")
-        GuiControl, ChooseString, Priority2, %Priority2%
+Gui, Add, Text, x665 y415 w60, 2nd:
+Gui, Add, DropDownList, x730 y415 w180 vPriority2, %PriorityList%
+if (Priority2 != "")
+    GuiControl, ChooseString, Priority2, %Priority2%
 
-    Gui, Add, Text, x660 y+10, 3rd:
-    Gui, Add, DropDownList, x+10 w200 vPriority3, %PriorityList%
-    if (Priority3 != "")
-        GuiControl, ChooseString, Priority3, %Priority3%
+Gui, Add, Text, x665 y445 w60, 3rd:
+Gui, Add, DropDownList, x730 y445 w180 vPriority3, %PriorityList%
+if (Priority3 != "")
+    GuiControl, ChooseString, Priority3, %Priority3%
 
-    Gui, Add, Text, x660 y+10, 4th:
-    Gui, Add, DropDownList, x+10 w200 vPriority4, %PriorityList%
-    if (Priority4 != "")
-        GuiControl, ChooseString, Priority4, %Priority4%
+Gui, Add, Text, x665 y475 w60, 4th:
+Gui, Add, DropDownList, x730 y475 w180 vPriority4, %PriorityList%
+if (Priority4 != "")
+    GuiControl, ChooseString, Priority4, %Priority4%
 
-    Gui, Add, Text, x660 y+10, 5th:
-    Gui, Add, DropDownList, x+10 w200 vPriority5, %PriorityList%
-    if (Priority5 != "")
-        GuiControl, ChooseString, Priority5, %Priority5%
+Gui, Add, Text, x665 y505 w60, 5th:
+Gui, Add, DropDownList, x730 y505 w180 vPriority5, %PriorityList%
+if (Priority5 != "")
+    GuiControl, ChooseString, Priority5, %Priority5%
 
-    Gui, Add, Checkbox, x660 y+10 vMapReset Checked%MapReset%, Reset map cooldown with gems
+Gui, Add, Checkbox, x665 y540 w250 vMapReset Checked%MapReset%, Reset map cooldown with gems
 
 ; ------------------------------------------------------------------------------
 ; TAB 3: ГИЛЬДИЯ И ПЕРСОНАЛЬНОЕ ДРЕВО
@@ -498,16 +498,17 @@ Gui, Tab, 6
     Gui, Add, Text, x40 y+5, - завершать миссии на карте
     Gui, Add, Text, x40 y+5, - искать и запускать новые миссии на карте
     Gui, Add, Text, x40 y+5, - повышать уровень героев\стражей\спец улучшений на этапах (нужно доделать)
-    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисии особождения\подземелья (0.3.2)
-    Gui, Add, Text, x40 y+5, - пробуждать героев, участввать в разломе хаоса и прокачивать персональное древо (0.3.3)
+    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисcии особождения\подземелья (0.3.2)
+    Gui, Add, Text, x40 y+5, - пробуждать героев, участвовать в разломе хаоса и прокачивать персональное древо (0.3.3)
+	Gui, Add, Text, x40 y+5, - забирать награды за ежедневные\ежнедельные задания, проверять почту, забирать награды событий (0.3.4)
 
     ; --- Шаблон: по идее работает, но не тестировал (закомментировано) ---
     Gui, Font, Bold
     Gui, Add, Text, x40 y+15, по идее работает, но не тестировал (в яндекс играх):
     Gui, Font, Norm
-    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисии особождения\подземелья
-    Gui, Add, Text, x40 y+5, - пробуждать героев, участввать в разломе хаоса и прокачивать персональное древо
-    ; Gui, Add, Text, x40 y+5, - пункт 3 (пример)
+    Gui, Add, Text, x40 y+5, - сражаться на арене, а так же выполнять мисcии особождения\подземелья
+    Gui, Add, Text, x40 y+5, - пробуждать героев, участвовать в разломе хаоса и прокачивать персональное древо
+    Gui, Add, Text, x40 y+5, - забирать награды за ежедневные\ежнедельные задания, проверять почту, забирать награды событий (0.3.4)
 
     ; --- Шаблон: не умеет (закомментировано) ---
     ; Gui, Font, Bold
