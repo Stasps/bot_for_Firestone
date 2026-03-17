@@ -273,11 +273,11 @@ Gui, Font, Norm
 Gui, Add, Text, x350 y460 w250, Выберите героев для улучшения:
 
 Gui, Add, Checkbox, x350 y480 w135 vUpgradeSpecial Checked%UpgradeSpecial%, Общие
-Gui, Add, Checkbox, x480 y480 w135 vUpgradeGuardian Checked%UpgradeGuardian%, Стражи
+Gui, Add, Checkbox, x490 y480 w135 vUpgradeGuardian Checked%UpgradeGuardian%, Стражи
 Gui, Add, Checkbox, x350 y505 w135 vUpgradeH1 Checked%UpgradeH1%, Герой на позиции 1
-Gui, Add, Checkbox, x480 y505 w135 vUpgradeH2 Checked%UpgradeH2%, Герой на позиции 2
+Gui, Add, Checkbox, x490 y505 w135 vUpgradeH2 Checked%UpgradeH2%, Герой на позиции 2
 Gui, Add, Checkbox, x350 y530 w135 vUpgradeH3 Checked%UpgradeH3%, Герой на позиции 3
-Gui, Add, Checkbox, x480 y530 w135 vUpgradeH4 Checked%UpgradeH4%, Герой на позиции 4
+Gui, Add, Checkbox, x490 y530 w135 vUpgradeH4 Checked%UpgradeH4%, Герой на позиции 4
 Gui, Add, Checkbox, x350 y555 w135 vUpgradeH5 Checked%UpgradeH5%, Герой на позиции 5
 
 ; ========== КОЛОНКА 3 ==========
