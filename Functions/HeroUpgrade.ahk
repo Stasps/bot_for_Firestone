@@ -53,76 +53,52 @@ HeroUpgrade(){
         Count := 0
         Loop
         {
-;            PixelSearch, X, Y, 1500*ResXnew/1920, ((975-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1504*ResXnew/1920, ((985-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x542710, 3, Fast RGB
-;            if (ErrorLevel = 0)
-;            {
-;                ; Found the toggle button color indicating we are NOT on max/milestone yet?
-;                ; Or clicking to toggle. Based on your code, this clicks until satisfied.
-;                MouseClick, Left, 1649*ResXnew/1920, ((970-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1, 0
-;                Sleep, 300
-;                break
-;            }
-;            ; Try clicking to switch mode
-;            MouseClick, Left, 1649*ResXnew/1920, ((970-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1, 0
-;            Sleep, 300
-;            Count++
-;            if (Count >= MaxTries)
-;            {
-;                MsgBox, , Hero Upgrades, Failed to find pixel after %Count% tries., 2
-;                break
-;            }
-
-		
-found := ImageSearchDLL(X, Y, 1450*ResXnew/1920, ((950-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1750*ResXnew/1920, ((1025-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), UpgradeMax.png, 0.6, 1.5, 0.02) ; диапазон масштаба и шаг
-
-if (found)
-{
-    ; Картинка найдена — значит, кнопка видна (например, режим не max)
-    ; Кликаем по той же точке, что и раньше
-    MouseClick, Left, 1649*ResXnew/1920, ((970-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1, 0
-    Sleep, 300
-    break
-}
-
-; Если не нашли — пробуем кликнуть и повторить
-MouseClick, Left, 1649*ResXnew/1920, ((970-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1, 0
-Sleep, 300
-Count++
-if (Count >= MaxTries)
-{
-    MsgBox, , Hero Upgrades, Failed to find image after %Count% tries., 2
-    break
-}
-}
+            ; временно: ищем любой пиксель (заглушка)
+            PixelSearch, X, Y, 1450*VarX, (950-22)*VarY + BorTop, 1750*VarX, (1025-22)*VarY + BorTop, 0x000000, 3, Fast RGB
+            if (ErrorLevel = 0)
+            {
+                MouseClick, Left, 1649*VarX, (970-22)*VarY + BorTop, 1, 0
+                Sleep, 300
+                break
+            }
+            MouseClick, Left, 1649*VarX, (970-22)*VarY + BorTop, 1, 0
+            Sleep, 300
+            Count++
+            if (Count >= MaxTries)
+            {
+                MsgBox, , Hero Upgrades, Failed after %Count% tries., 2
+                break
+            }
+        }
 
         ; --- Special Upgrade ---
         If (UpgradeSpecial = 1)
-            ClickHeroIfPixelFound(1874*ResXnew/1920, ((207-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1889*ResXnew/1920, ((249-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x16BC15, 1770*ResXnew/1920, ((205-22)*(ResYnew-BorTop-BorBot)/1010+BorTop))
+            ClickHeroIfPixelFound(1874*VarX, (207-22)*VarY + BorTop, 1889*VarX, (249-22)*VarY + BorTop, 0x15BC16, 1770*VarX, (205-22)*VarY + BorTop)
 
         ; --- Heroes upgrades (from 5th to 1st) ---
         If (UpgradeH5 = 1)
-            ClickHeroIfPixelFound(1868*ResXnew/1920, ((880-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1885*ResXnew/1920, ((912-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x16BC15, 1770*ResXnew/1920, ((873-22)*(ResYnew-BorTop-BorBot)/1010+BorTop))  ; 5th hero
+            ClickHeroIfPixelFound(1868*VarX, (880-22)*VarY + BorTop, 1885*VarX, (912-22)*VarY + BorTop, 0x15BC16, 1770*VarX, (873-22)*VarY + BorTop)  ; 5th hero
         If (UpgradeH4 = 1)
-            ClickHeroIfPixelFound(1864*ResXnew/1920, ((770-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1889*ResXnew/1920, ((802-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x16BC15, 1770*ResXnew/1920, ((772-22)*(ResYnew-BorTop-BorBot)/1010+BorTop))  ; 4th hero
+            ClickHeroIfPixelFound(1864*VarX, (770-22)*VarY + BorTop, 1889*VarX, (802-22)*VarY + BorTop, 0x15BC16, 1770*VarX, (772-22)*VarY + BorTop)  ; 4th hero
         If (UpgradeH3 = 1)
-            ClickHeroIfPixelFound(1866*ResXnew/1920, ((654-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1889*ResXnew/1920, ((693-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x16BC15, 1770*ResXnew/1920, ((650-22)*(ResYnew-BorTop-BorBot)/1010+BorTop))  ; 3rd hero
+            ClickHeroIfPixelFound(1866*VarX, (654-22)*VarY + BorTop, 1889*VarX, (693-22)*VarY + BorTop, 0x15BC16, 1770*VarX, (650-22)*VarY + BorTop)  ; 3rd hero
         If (UpgradeH2 = 1)
-            ClickHeroIfPixelFound(1866*ResXnew/1920, ((545-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1885*ResXnew/1920, ((584-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x16BC15, 1770*ResXnew/1920, ((539-22)*(ResYnew-BorTop-BorBot)/1010+BorTop))  ; 2nd hero
+            ClickHeroIfPixelFound(1866*VarX, (545-22)*VarY + BorTop, 1885*VarX, (584-22)*VarY + BorTop, 0x15BC16, 1770*VarX, (539-22)*VarY + BorTop)  ; 2nd hero
         If (UpgradeH1 = 1)
-            ClickHeroIfPixelFound(1862*ResXnew/1920, ((434-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1888*ResXnew/1920, ((469-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x16BC15, 1770*ResXnew/1920, ((427-22)*(ResYnew-BorTop-BorBot)/1010+BorTop))  ; 1st hero
+            ClickHeroIfPixelFound(1862*VarX, (434-22)*VarY + BorTop, 1888*VarX, (469-22)*VarY + BorTop, 0x15BC16, 1770*VarX, (427-22)*VarY + BorTop)  ; 1st hero
 
         ; --- Guardian Upgrade ---
         If (UpgradeGuardian = 1)
-            ClickHeroIfPixelFound(1869*ResXnew/1920, ((319-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1890*ResXnew/1920, ((352-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x16BC15, 1770*ResXnew/1920, ((317-22)*(ResYnew-BorTop-BorBot)/1010+BorTop))
+            ClickHeroIfPixelFound(1869*VarX, (319-22)*VarY + BorTop, 1890*VarX, (352-22)*VarY + BorTop, 0x15BC16, 1770*VarX, (317-22)*VarY + BorTop)
 
     } else {
         ; --- Standard Single Check Mode ---
 
         ; check special upgrade
         If (UpgradeSpecial = 1) {
-            PixelSearch, X, Y, 1874*ResXnew/1920, ((207-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1889*ResXnew/1920, ((249-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
+            PixelSearch, X, Y, 1874*VarX, (207-22)*VarY + BorTop, 1889*VarX, (249-22)*VarY + BorTop, 0x08A00A, 3, Fast RGB
             If (ErrorLevel = 0 ){
-                MouseMove, 1770*ResXnew/1920, ((205-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+                MouseMove, 1770*VarX, (205-22)*VarY + BorTop, 0
                 Sleep, 1000
                 Click
                 Sleep, 1000
@@ -131,9 +107,9 @@ if (Count >= MaxTries)
 
         ; check 5th hero
         If (UpgradeH5 = 1) {
-            PixelSearch, X, Y, 1868*ResXnew/1920, ((880-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1885*ResXnew/1920, ((912-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
+            PixelSearch, X, Y, 1868*VarX, (880-22)*VarY + BorTop, 1885*VarX, (912-22)*VarY + BorTop, 0x08A00A, 3, Fast RGB
             If (ErrorLevel = 0 ){
-                MouseMove, 1770*ResXnew/1920, ((873-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+                MouseMove, 1770*VarX, (873-22)*VarY + BorTop, 0
                 Sleep, 1000
                 Click
                 Sleep, 1000
@@ -142,9 +118,9 @@ if (Count >= MaxTries)
 
         ; check 4th hero
         If (UpgradeH4 = 1) {
-            PixelSearch, X, Y, 1864*ResXnew/1920, ((770-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1889*ResXnew/1920, ((802-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
+            PixelSearch, X, Y, 1864*VarX, (770-22)*VarY + BorTop, 1889*VarX, (802-22)*VarY + BorTop, 0x08A00A, 3, Fast RGB
             If (ErrorLevel = 0 ){
-                MouseMove, 1770*ResXnew/1920, ((772-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+                MouseMove, 1770*VarX, (772-22)*VarY + BorTop, 0
                 Sleep, 1000
                 Click
                 Sleep, 1000
@@ -153,9 +129,9 @@ if (Count >= MaxTries)
 
         ; check 3rd hero
         If (UpgradeH3 = 1) {
-            PixelSearch, X, Y, 1866*ResXnew/1920, ((654-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1889*ResXnew/1920, ((693-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
+            PixelSearch, X, Y, 1866*VarX, (654-22)*VarY + BorTop, 1889*VarX, (693-22)*VarY + BorTop, 0x08A00A, 3, Fast RGB
             If (ErrorLevel = 0 ){
-                MouseMove, 1770*ResXnew/1920, ((650-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+                MouseMove, 1770*VarX, (650-22)*VarY + BorTop, 0
                 Sleep, 1000
                 Click
                 Sleep, 1000
@@ -164,9 +140,9 @@ if (Count >= MaxTries)
 
         ; check 2nd hero
         If (UpgradeH2 = 1) {
-            PixelSearch, X, Y, 1866*ResXnew/1920, ((545-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1885*ResXnew/1920, ((584-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
+            PixelSearch, X, Y, 1866*VarX, (545-22)*VarY + BorTop, 1885*VarX, (584-22)*VarY + BorTop, 0x08A00A, 3, Fast RGB
             If (ErrorLevel = 0 ){
-                MouseMove, 1770*ResXnew/1920, ((539-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+                MouseMove, 1770*VarX, (539-22)*VarY + BorTop, 0
                 Sleep, 1000
                 Click
                 Sleep, 1000
@@ -175,9 +151,9 @@ if (Count >= MaxTries)
 
         ; check 1st hero
         If (UpgradeH1 = 1) {
-            PixelSearch, X, Y, 1862*ResXnew/1920, ((434-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1888*ResXnew/1920, ((469-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
+            PixelSearch, X, Y, 1862*VarX, (434-22)*VarY + BorTop, 1888*VarX, (469-22)*VarY + BorTop, 0x08A00A, 3, Fast RGB
             If (ErrorLevel = 0 ){
-                MouseMove, 1770*ResXnew/1920, ((427-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+                MouseMove, 1770*VarX, (427-22)*VarY + BorTop, 0
                 Sleep, 1000
                 Click
                 Sleep, 1000
@@ -186,9 +162,9 @@ if (Count >= MaxTries)
 
         ; check guardian
         If (UpgradeGuardian = 1) {
-            PixelSearch, X, Y, 1869*ResXnew/1920, ((319-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1890*ResXnew/1920, ((352-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
+            PixelSearch, X, Y, 1869*VarX, (319-22)*VarY + BorTop, 1890*VarX, (352-22)*VarY + BorTop, 0x08A00A, 3, Fast RGB
             If (ErrorLevel = 0 ){
-                MouseMove, 1770*ResXnew/1920, ((317-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+                MouseMove, 1770*VarX, (317-22)*VarY + BorTop, 0
                 Sleep, 1000
                 Click
                 Sleep, 1000

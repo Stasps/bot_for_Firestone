@@ -1,4 +1,4 @@
-; Alchemist.ahk
+; Alchemist.ahk — адаптировано, переведено, поиск по картинке отсутствует
 
 #Include Functions\subFunctions\BigClose.ahk
 
@@ -6,129 +6,143 @@
 Alchemist(){
     ControlFocus,, Firestone
     ; open Alchemist
-    MouseMove, 511*ResXnew/1920, ((837-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+    MouseMove, 511*VarX, (837-22)*VarY + BorTop, 0
     Sleep, 1000
     Click
     Sleep, 1500
-    ; check if blood alchemy isn't running
-    PixelSearch, X, Y, 928*ResXnew/1920, ((519-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 948*ResXnew/1920, ((535-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0xFFC700, 3, Fast RGB
+    
+    ; check if blood alchemy isn't running (ищём тёмно синий фон. если он есть - алхимия не запущена)
+    PixelSearch, X, Y, 816*VarX, (620-22)*VarY + BorTop, 1063*VarX, (651-22)*VarY + BorTop, 0x1B395B, 3, Fast RGB
+    If (ErrorLevel = 0){
+        MsgBox, , Алхимия, Алхимия за КРОВЬ ДРАКОНА не запущена, 1.5
+    } Else {
+        ; check for completed alchemy with blood (поиск чуть расширил влево)
+        PixelSearch, X, Y, 960*VarX, (746-22)*VarY + BorTop, 1037*VarX, (792-22)*VarY + BorTop, 0x0AA008, 3, Fast RGB
         If (ErrorLevel = 0){
-            MsgBox, , Статус Алхимии, алхмия за КРОВЬ ДРАКОНА не запущена, 1.5
-        } Else {
-        ; check for completed alchemy with blood
-        PixelSearch, X, Y, 985*ResXnew/1920, ((746-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1037*ResXnew/1920, ((792-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
-            If (ErrorLevel = 0){
-                MouseMove, 949*ResXnew/1920, ((777-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
-                MsgBox, , Статус Алхимии, алхмия за КРОВЬ ДРАКОНА завершена, 1.5
-                Click
-                Sleep, 1000
-            }
-        }
-
-;    ; check if dust alchemy isn't running
-;    PixelSearch, X, Y, 1274*ResXnew/1920, ((515-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1298*ResXnew/1920, ((537-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0xFFC700, 3, Fast RGB
-;        If (ErrorLevel = 0){
-;            MsgBox, , Статус Алхимии, алхмия за ПЫЛЬ не запущена, 1.5
-;        } Else {
-;            ; check for completed alchemy with dust
-;            PixelSearch, x, y, 1336*ResXnew/1920, ((748-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1386*ResXnew/1920, ((789-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
-;                If (ErrorLevel = 0){
-;                    MouseMove, 1286*ResXnew/1920, ((786-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
-;                    MsgBox, , Статус Алхимии, алхмия за ПЫЛЬ завершена, 1.5
-;                    Click
-;                    Sleep, 1000
-;                }
-;            }
-;    ; check if exotic coin alchemy isn't running
-;   PixelSearch, X, Y, 1622*ResXnew/1920, ((518-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1645*ResXnew/1920, ((538-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0xFFC700, 3, Fast RGB
-;    If (ErrorLevel = 0){
-;        MsgBox, , Статус Алхимии, алхмия за МОНЕТЫ не запущена, 1.5
-;    } Else {
-;        ; check for completed alchemy with алхмия за МОНЕТЫ
-;        PixelSearch, X, Y, 1679*ResXnew/1920, ((748-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1735*ResXnew/1920, ((796-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x0AA008, 3, Fast RGB
-;            If (ErrorLevel = 0){
-;                MouseMove, 1632*ResXnew/1920, ((772-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
-;                MsgBox, , Статус Алхимии, алхмия за МОНЕТЫ завершена, 1.5
-;                Click
-;                Sleep, 1000
-;            }
-;        }
-; ============== доработать ===========
-    ; check for free to complete alchemy with blood
-;    PixelSearch, X, Y, 969*ResXnew/1920, ((742-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1026*ResXnew/1920, ((756-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0xF9AA47, 3, Fast RGB
-;        If (ErrorLevel = 0){
-;            MouseMove, 949*ResXnew/1920, ((777-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
-;            MsgBox, , Статус Алхимии, алхмия за КРОВЬ ДРАКОНА может быть БЕСПЛАТНО завершена, 1.5
-;            Click
-;            Sleep, 1000
-;        }
-; ============== дальше мусор =====
-;   ; check for free to complete alchemy with dust
-;    PixelSearch, x, y, 1336*ResXnew/1920, ((748-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1386*ResXnew/1920, ((789-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0xF9AA47, 3, Fast RGB
-;        If (ErrorLevel = 0){
-;            MouseMove, 1286*ResXnew/1920, ((786-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
-;            MsgBox, , Статус Алхимии, алхмия за ПЫЛЬ может быть БЕСПЛАТНО завершена, 1.5
-;            Click
-;            Sleep, 1000
-;        }
-;   ; check for free to complete alchemy with алхмия за МОНЕТЫ
-;    PixelSearch, X, Y, 1679*ResXnew/1920, ((748-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1735*ResXnew/1920, ((796-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0xF9AA47, 3, Fast RGB
-;        If (ErrorLevel = 0){
-;            MouseMove, 1632*ResXnew/1920, ((772-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
-;            MsgBox, , Статус Алхимии, алхмия за МОНЕТЫ может быть БЕСПЛАТНО завершена, 1.5
-;            Click
-;           Sleep, 1000
-;        }
-    ; check for in-process alchemy with blood
-    PixelSearch, X, Y, 1007*ResXnew/1920, ((735-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1030*ResXnew/1920, ((766-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x916A38, 3, Fast RGB
-        If (ErrorLevel = 0){
-            MsgBox, , Статус Алхимии, алхмия за КРОВЬ ДРАКОНА бесплатно завершить нельзя `n (осталось больше 3х минут), 1.5
-;            Goto, DustSearch
-        } Else {
-            MouseMove, 951*ResXnew/1920, ((771-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
-            MsgBox, , Статус Алхимии, Запускаем алхмия за КРОВЬ ДРАКОНА, 1.5
+            MouseMove, 949*VarX, (777-22)*VarY + BorTop, 0
+            MsgBox, , Алхимия, Алхимия за КРОВЬ ДРАКОНА завершена, 1.5
             Click
             Sleep, 1000
-;            Goto, DustSearch
         }
+    }
+
+;    ; check if dust alchemy isn't running
+;    PixelSearch, X, Y, 1274*VarX, (515-22)*VarY + BorTop, 1298*VarX, (537-22)*VarY + BorTop, 0xFFC700, 3, Fast RGB
+;    If (ErrorLevel = 0){
+;        MsgBox, , Алхимия, Алхимия за ПЫЛЬ не запущена, 1.5
+;    } Else {
+;        ; check for completed alchemy with dust
+;        PixelSearch, x, y, 1336*VarX, (748-22)*VarY + BorTop, 1386*VarX, (789-22)*VarY + BorTop, 0x0AA008, 3, Fast RGB
+;        If (ErrorLevel = 0){
+;            MouseMove, 1286*VarX, (786-22)*VarY + BorTop, 0
+;            MsgBox, , Алхимия, Алхимия за ПЫЛЬ завершена, 1.5
+;            Click
+;            Sleep, 1000
+;        }
+;    }
+;
+;    ; check if exotic coin alchemy isn't running
+;    PixelSearch, X, Y, 1622*VarX, (518-22)*VarY + BorTop, 1645*VarX, (538-22)*VarY + BorTop, 0xFFC700, 3, Fast RGB
+;    If (ErrorLevel = 0){
+;        MsgBox, , Алхимия, Алхимия за МОНЕТЫ не запущена, 1.5
+;    } Else {
+;        ; check for completed alchemy with монеты
+;        PixelSearch, X, Y, 1679*VarX, (748-22)*VarY + BorTop, 1735*VarX, (796-22)*VarY + BorTop, 0x0AA008, 3, Fast RGB
+;        If (ErrorLevel = 0){
+;            MouseMove, 1632*VarX, (772-22)*VarY + BorTop, 0
+;            MsgBox, , Алхимия, Алхимия за МОНЕТЫ завершена, 1.5
+;            Click
+;            Sleep, 1000
+;        }
+;    }
+
+; проверка на бесплатное завершение алхимии (кровь дракона)
+PixelSearch, X, Y, 790*VarX, (705-22)*VarY + BorTop, 1080*VarX, (850-22)*VarY + BorTop, 0xA6009C, 3, Fast RGB
+If (ErrorLevel = 0) {
+    ; найден алмаз — значит, завершение только за алмазы
+    ;MsgBox, , Алхимия, Завершить можно только за алмазы., 1
+} Else {
+    ; алмаза нет — ищем светлый оранжевый (кнопка FREE)
+    PixelSearch, X, Y, 790*VarX, (705-22)*VarY + BorTop, 1080*VarX, (850-22)*VarY + BorTop, 0xF19C42, 5, Fast RGB
+    If (ErrorLevel = 0) {
+        MouseMove, 949*VarX, (777-22)*VarY + BorTop, 0
+        MsgBox, , Алхимия, Алхимию за КРОВЬ ДРАКОНА можно завершить БЕСПЛАТНО, 1.5
+        Click
+        Sleep, 1000
+    }
+}
+
+; ============== дальше мусор =====
+;   ; check for free to complete alchemy with dust
+;    PixelSearch, x, y, 1336*VarX, (748-22)*VarY + BorTop, 1386*VarX, (789-22)*VarY + BorTop, 0xF9AA47, 3, Fast RGB
+;    If (ErrorLevel = 0){
+;        MouseMove, 1286*VarX, (786-22)*VarY + BorTop, 0
+;        MsgBox, , Алхимия, Алхимию за ПЫЛЬ можно завершить БЕСПЛАТНО, 1.5
+;        Click
+;        Sleep, 1000
+;    }
+;
+;   ; check for free to complete alchemy with монеты
+;    PixelSearch, X, Y, 1679*VarX, (748-22)*VarY + BorTop, 1735*VarX, (796-22)*VarY + BorTop, 0xF9AA47, 3, Fast RGB
+;    If (ErrorLevel = 0){
+;        MouseMove, 1632*VarX, (772-22)*VarY + BorTop, 0
+;        MsgBox, , Алхимия, Алхимию за МОНЕТЫ можно завершить БЕСПЛАТНО, 1.5
+;        Click
+;        Sleep, 1000
+;    }
+
+    ; check for in-process alchemy with blood (цвет поиска изменил на поиск алмазов - иначе он всегда находит эту кнопку
+	PixelSearch, X, Y, 790*VarX, (705-22)*VarY + BorTop, 1080*VarX, (850-22)*VarY + BorTop, 0xA6009C, 3, Fast RGB	
+    If (ErrorLevel = 0){
+        MsgBox, , Алхимия, Алхимию за КРОВЬ ДРАКОНА нельзя завершить бесплатно`n(осталось больше 3 минут), 1.5
+        Goto, FinishAlch
+    } Else {
+        MouseMove, 951*VarX, (771-22)*VarY + BorTop, 0
+        MsgBox, , Алхимия, Запускаем алхимию за КРОВЬ ДРАКОНА, 1.5
+        Click
+        Sleep, 1000
+;        Goto, DustSearch
+    }
 
 ;    DustSearch:
 ;    ; check if don't use dust is checked
 ;    GuiControlGet, Checked, , Dust
-;        If (Checked = 1){
+;    If (Checked = 1){
+;        Goto, ExoticCheck
+;    } Else {
+;        ; check for in-process alchemy with dust
+;        PixelSearch, X, Y, 1346*VarX, (734-22)*VarY + BorTop, 1373*VarX, (766-22)*VarY + BorTop, 0x916A38, 3, Fast RGB
+;        If (ErrorLevel = 0){
+;            MsgBox, , Алхимия, Алхимию за ПЫЛЬ нельзя завершить бесплатно (больше 3 минут), 1.5
 ;            Goto, ExoticCheck
 ;        } Else {
-;            ; check for in-process alchemy with dust
-;            PixelSearch, X, Y, 1346*ResXnew/1920, ((734-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1373*ResXnew/1920, ((766-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x916A38, 3, Fast RGB
-;                If (ErrorLevel = 0){
-;                    MsgBox, , Статус Алхимии, алхмия за ПЫЛЬ бесплатно завершить нельзя (больше 3х минут), 1.5
-;                    Goto, ExoticCheck
-;                } Else {
-;                    MouseMove, 1286*ResXnew/1920, ((786-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
-;                    MsgBox, , Статус Алхимии, Запускаем алхмия за ПЫЛЬ, 1.5
-;                    Click
-;                    Sleep, 1000
-;                    Goto, ExoticCheck
-;                }
+;            MouseMove, 1286*VarX, (786-22)*VarY + BorTop, 0
+;            MsgBox, , Алхимия, Запускаем алхимию за ПЫЛЬ, 1.5
+;            Click
+;            Sleep, 1000
+;            Goto, ExoticCheck
 ;        }
-;    ; check If using алхмия за МОНЕТЫ, go through same steps as above If so
+;    }
+;
+;    ; check If using монеты, go through same steps as above If so
 ;    ExoticCheck:
 ;    GuiControlGet, Checked, , Coin,
-;        If (Checked = 1){
-;            ; check for in-process alchemy with алхмия за МОНЕТЫ
-;            PixelSearch, X, Y, 1699*ResXnew/1920, ((737-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 1723*ResXnew/1920, ((767-22)*(ResYnew-BorTop-BorBot)/1010+BorTop), 0x916A38, 3, Fast RGB
-;                If (ErrorLevel = 0){
-;                    MsgBox, , Статус Алхимии, алхмия за МОНЕТЫ бесплатно завершить нельзя (больше 3х минут), 1.5
-;                    Goto, FinishAlch
-;                } Else {
-;                    ; start exotic coin alchemy
-;                    MouseMove, 1641*ResXnew/1920, ((767-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
-;                    MsgBox, , Статус Алхимии, Запускаем алхмия за МОНЕТЫ, 1.5
-;                    Click
-;                    Sleep, 1000
-;                    Goto, FinishAlch
-;                }
-;            }
+;    If (Checked = 1){
+;        ; check for in-process alchemy with монеты
+;        PixelSearch, X, Y, 1699*VarX, (737-22)*VarY + BorTop, 1723*VarX, (767-22)*VarY + BorTop, 0x916A38, 3, Fast RGB
+;        If (ErrorLevel = 0){
+;            MsgBox, , Алхимия, Алхимию за МОНЕТЫ нельзя завершить бесплатно (больше 3 минут), 1.5
+;            Goto, FinishAlch
+;        } Else {
+;            ; start exotic coin alchemy
+;            MouseMove, 1641*VarX, (767-22)*VarY + BorTop, 0
+;            MsgBox, , Алхимия, Запускаем алхимию за МОНЕТЫ, 1.5
+;            Click
+;            Sleep, 1000
+;            Goto, FinishAlch
+;        }
+;    }
+
     FinishAlch:
     BigClose()
     Return

@@ -89,7 +89,7 @@ SettingsMap["BorTop"] := ["Resolution"]
 SettingsMap["BorBot"] := ["Resolution"]
 SettingsMap["VarX"] := ["Variable",0]
 SettingsMap["VarY"] := ["Variable",0]
-RusVer := "0.3.5"
+RusVer := "0.4.0"
 Ratio := ResXnew / (ResYnew - BorBot - BorTop)
 RatioStand := 1980/(1080 - 22 - 48)
 SettingsMap["Ratio"] := ["Debug"]
@@ -213,7 +213,7 @@ Gui, Add, Radio, x35 y235 w250 vSellNone Checked%SellNone%, 4. Sell Nothing
 
 ; --- Other Automation ---
 Gui, Add, GroupBox, x20 y265 w300 h130, Прочие автоматизации
-Gui, Add, Checkbox, x35 y285 w250 vNoEng Checked%NoEng%, Пропустить инженера
+Gui, Add, Checkbox, x35 y285 w250 vNoEng Checked%NoEng%, Пропустить механика
 Gui, Add, Checkbox, x35 y310 w250 vResearch Checked%Research%, Пропустить исследования
 Gui, Add, Checkbox, x35 y335 w250 vDisableWarning Checked%DisableWarning%, Disable Steam Warning
 
@@ -256,18 +256,16 @@ if (JewelChestExclude != "")
 Gui, Add, GroupBox, x335 y240 w300 h80, Алхимия
 Gui, Add, Checkbox, x350 y265 w250 vAlch Checked%Alch%, пропустить алхимию
 Gui, Font, Italic
-Gui, Add, Text, x350 y285 w250 cGray, запускает алхимию только за кровь дракона
+Gui, Add, Text, x350 y285 w280 cGray, запускает алхимию только за кровь дракона
 Gui, Font, Norm
 
 ; --- Hero Upgrades ---
 Gui, Add, GroupBox, x335 y330 w300 h260, Улучшение героев на этапах
-Gui, Add, Checkbox, x350 y355 w250 vNoHero Checked%NoHero%, (общее) не улучшать героев
-Gui, Add, Checkbox, x350 y380 w250 vNextMilestone Checked%NextMilestone%, (НЕ РАБОТАЕТ) Улучшать до макс уровня
+Gui, Add, Checkbox, x350 y350 w270 vNoHero Checked%NoHero%, (общее) не улучшать героев
+Gui, Add, Checkbox, x350 y375 w270 vNextMilestone Checked%NextMilestone%, (НЕ РАБОТАЕТ) Улучшать до макс уровня
 
 Gui, Font, Italic
-Gui, Add, Text, x350 y405 w250 cGray, если выключено — нажимает «улучшить» по разу
-Gui, Add, Text, x350 y420 w250 cGray, за круг. Желательно выставить в игре:
-Gui, Add, Text, x350 y435 w250 cGray, «улучшать до макс уровня»
+Gui, Add, Text, x350 y390 w270 cGray, Если выключено — улучшает каждого героя\стража по одному разу за круг. Потому перед стартом бота желательно выставить «усились макс.»
 Gui, Font, Norm
 
 Gui, Add, Text, x350 y460 w250, Выберите героев для улучшения:

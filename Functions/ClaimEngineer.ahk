@@ -6,7 +6,7 @@
 ClaimEngineer(){
     ControlFocus,, Firestone
     ;	open engineer
-	MsgBox, ,Инженер, открывам инженера, 1
+	MsgBox, ,Инженер, открывам механика, 1
     MouseMove, 1230*VarX, (820-22)*VarY + BorTop
     Sleep, 1000
     Click

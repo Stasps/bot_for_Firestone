@@ -1,6 +1,5 @@
 ; Deaeth85 Firestone Bot.ahk edited by "Я твой друг"
 #SingleInstance Force
-DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")   ; ? КРИТИЧЕСКИ ВАЖНО
 
 #Include Gui.ahk
 #Include Functions\Alchemist.ahk
@@ -31,53 +30,13 @@ SetWorkingDir %A_ScriptDir%
 #NoEnv
 SetBatchLines, -1
 
-; Загрузка библиотеки ImageSearchDLL
-hModule := DllCall("LoadLibrary", "str", "ImageSearchDLL.dll", "ptr")
-if (!hModule) {
-    MsgBox, 48, Ошибка, Не удалось загрузить ImageSearchDLL.dll!`nУбедитесь, что файл находится в папке со скриптом.
-    ExitApp
-}
-
-; Объявление функций из DLL
-DllCall("GetProcAddress", "ptr", hModule, "AStr", "ImageSearch", "ptr")
-DllCall("GetProcAddress", "ptr", hModule, "AStr", "ImageSearchWindow", "ptr")
-
-; Функция поиска изображения с поддержкой масштабирования
-ImageSearchDLL(ByRef outX, ByRef outY, x1, y1, x2, y2, imageFile, minScale := 0.5, maxScale := 2, scaleStep := 0.1) {
-    ; Подготовка параметров
-    scaleStep := Abs(scaleStep)
-    
-    ; Перебор масштабов от минимального к максимальному
-    scale := minScale
-    while (scale <= maxScale + 0.001) {
-        ; Формируем команду с параметрами масштаба
-        cmd := "ImageSearch(""" imageFile """, " x1 ", " y1 ", " x2 ", " y2 ", " scale ", " scale ")"
-        
-        ; Вызов функции из DLL
-        result := DllCall("ImageSearchDLL\ImageSearch", "AStr", cmd, "AStr")
-        
-        if (result != "0") {
-            ; Парсим результат: "X|Y" или "X|Y|scale"
-            StringSplit, coords, result, |
-            outX := coords1
-            outY := coords2
-            return true
-        }
-        
-        scale += scaleStep
-    }
-    
-    return false
-}
-
-
 global lastExecutionTimeArena := 0
 global MapPoints :=
 
 ; start of main script
 MainScript(){
     CoordMode, Mouse, Screen
-    CoordMode, Pixel, Screen 
+    CoordMode, Pixel, Screen
 
 ; ====== АКТИВАЦИЯ И ФОКУС ======
 ControlFocus,, Firestone        ; фокус ввода (для клавиатуры)
@@ -100,8 +59,8 @@ Sleep, 100  ; небольшая пауза для гарантии
 MsgBox, 64, Проверка настроек, Если рамки указаны верно - бот прокликает по углам игры и откроет-закроет меню.`nНажми ESC чтобы остановить бота., 1
 
 ; Левый верхний угол
-    CoordMode, Mouse, Screen
-    CoordMode, Pixel, Screen 
+CoordMode, Mouse, Screen
+CoordMode, Pixel, Screen
 MouseMove, 5*VarX, 5*VarY + BorTop
 Click
 Sleep, 500
@@ -117,8 +76,8 @@ Click
 Sleep, 500
 
 ; Правый верхний угол (двойной клик)
-    CoordMode, Mouse, Screen
-    CoordMode, Pixel, Screen 
+CoordMode, Mouse, Screen
+CoordMode, Pixel, Screen
 MouseMove, 1910*VarX, 5*VarY + BorTop
 Sleep, 1000
 Click
@@ -127,8 +86,6 @@ Click
 Sleep, 500
 
 loop:
-;	CoordMode, Mouse, Screen
-;	CoordMode, Pixel, Screen 
     ControlFocus,, Firestone
     ; do main screen sections
     MsgBox, , Проверка главного меню, Проверяем: мы находимся на главном экране в начале цикла, 2
@@ -243,28 +200,28 @@ loop:
     }
     GuiControlGet, SelectedItem, ,Delay,
     If (SelectedItem="30"){
-        MouseMove, 947*ResXnew/1920, ((755-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+        MouseMove, 947*VarX, (755-22)*VarY + BorTop
         Sleep, 30000
         Goto, Loop
     }
     GuiControlGet, SelectedItem, ,Delay,
     If (SelectedItem="60"){
-        MouseMove, 947*ResXnew/1920, ((755-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+        MouseMove, 947*VarX, (755-22)*VarY + BorTop
         Sleep, 60000
         Goto, Loop
     }
     GuiControlGet, SelectedItem, ,Delay,
     If (SelectedItem="90"){
-        MouseMove, 947*ResXnew/1920, ((755-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+        MouseMove, 947*VarX, (755-22)*VarY + BorTop
         Sleep, 90000
         Goto, Loop
     }
     GuiControlGet, SelectedItem, ,Delay,
     If (SelectedItem="120"){
-        MouseMove, 947*ResXnew/1920, ((755-22)*(ResYnew-BorTop-BorBot)/1010+BorTop)
+        MouseMove, 947*VarX, (755-22)*VarY + BorTop
         Sleep, 120000
         Goto, Loop
-}
+    }
 }
 
 GuiEscape:
