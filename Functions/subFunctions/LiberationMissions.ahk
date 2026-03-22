@@ -1,4 +1,4 @@
-; LiberationMissions.ahk Ч адаптировано
+; LiberationMissions.ahk адаптировано
 
 #Include Functions\subFunctions\BigClose.ahk
 #Include Functions\subFunctions\LiberationInProgressCheck.ahk
@@ -103,8 +103,14 @@ LiberationMissions(){
     ; === 80 Stars ===
     80Stars:
     {
-		; error - тут возможна ошибка. потому 133 заменил на 145
-        MouseMove, 145*VarX, (748-22)*VarY + BorTop, 0
+        ; прокрутка вниз на 12 раз, чтобы поднять нужную миссию
+        Loop, 12{
+            Send, {WheelUp}
+            Sleep, 50
+        }
+        
+        ; клик по координатам миссии 110 звёзд (после прокрутки она на месте 80)
+        MouseMove, 412*VarX, (755-22)*VarY + BorTop, 0
         Sleep, 1000
         Click
         Sleep, 1500
@@ -122,7 +128,8 @@ LiberationMissions(){
     ; === 60 Stars ===
     60Stars:
     {
-        Loop, 63{
+        ; прокрутка вверх на 51 раз (было 63, уменьшили на 12)
+        Loop, 51{
             Send, {WheelUp}
             Sleep, 50
         }
